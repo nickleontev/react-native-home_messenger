@@ -1,0 +1,9 @@
+export const SERVER_URL = "http://192.168.2.56:8080/";
+export const SIGN_IN = "api/auth/signin";
+export const SIGN_UP = "api/auth/signup";
+export const CREATE_PRIVATE_CHAT = "api/create/chat/private";
+export const GET_CHATS = "api/get/chats";
+export const GET_ALL_CHAT_MESSAGE = "api/get/message/all";
+export const GET_ALL_GIFTED_CHAT_MESSAGE = "api/get/gifted/message/all";
+export const SEND_MESSAGE = "api/send/message";
+export const SEND_GIFTED_MESSAGE = "api/send/gifted/message";
