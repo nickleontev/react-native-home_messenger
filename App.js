@@ -2,13 +2,22 @@ import React from "react";
 import Feed from "./src/feed";
 import Detail from "./src/detail";
 import ChatListScreen from "./src/ChatListScreen";
-import Map from "./src/MapScreen"
+import Map from "./src/MapScreen";
+import { MaterialCommunityIcons } from "@expo/vector-icons";
+
+import { HeaderButtons, Item } from "react-navigation-header-buttons";
+import { AppHeaderIcon } from "./src/AppHeaderIcon";
 
 import Screen1 from "./src/screens/drawer/screen1";
 import Screen2 from "./src/screens/drawer/screen2";
 import Screen3 from "./src/screens/drawer/screen3";
 
+import { MainScreen } from "./src/MainScreen";
+
+import AddContact from "./src/AddContact";
+
 import ChatScreen from "./src/back_up_screen/ChatScreen";
+import ContactsListScreen from "./src/ContactsListScreen";
 
 import Tab1 from "./src/screens/tabs/Tab1";
 import SignInTab from "./src/screens/tabs/SignInTab";
@@ -32,6 +41,9 @@ import {
   useColorScheme,
   AppearanceProvider
 } from "react-native-appearance";
+
+import { Text } from "react-native";
+import { TouchableOpacity } from "react-native-gesture-handler";
 
 const Drawer = createDrawerNavigator();
 const Stack = createStackNavigator();
@@ -77,6 +89,36 @@ App = () => {
           title: "Detail Screen"
         }}
       />
+
+      <Stack.Screen
+        name="Chat"
+        component={ChatScreen}
+        options={({ navigation }) => ({
+          title: appContent.appName,
+          headerRight: () => (
+            <HeaderButtons HeaderButtonComponent={AppHeaderIcon}>
+              {/* <Item
+                title="Take photo"
+                iconName="gps-fixed"
+                onPress={() => console.log("Press photo")}
+              /> */}
+
+              <MaterialCommunityIcons
+                name="crosshairs-gps"
+                size={24}
+                color="white"
+                onPress={() => navigation.navigate("Map")}
+              />
+            </HeaderButtons>
+          )
+        })}
+      />
+
+      <Stack.Screen
+        name="Map"
+        component={Map}
+      />
+
       <Stack.Screen name="Bottom Tabs" children={this.createBottomTabs} />
     </Stack.Navigator>
   );
@@ -84,10 +126,16 @@ App = () => {
   createDrawer = () => (
     <Drawer.Navigator>
       <Drawer.Screen name="Chats" component={ChatListScreen} />
-      <Drawer.Screen name="Feed" component={Feed} />
-      <Drawer.Screen name="Chat" component={ChatScreen} />
-      <Drawer.Screen name="Contacts" component={ChatScreen} />
-      <Drawer.Screen name="Settings" component={Map} />
+      <Drawer.Screen name="Contacts" component={ContactsListScreen} />
+      <Drawer.Screen name="Add contact" component={AddContact} />
+      <Drawer.Screen name="Settings" component={Detail} />
+      
+      {/* <Drawer.Screen
+        name="Chat"
+        component={ChatScreen}
+        options={{ headerRight: () => <Text>123</Text> }}
+      /> */}
+      {/* <Drawer.Screen name="Settings" component={Map} /> */}
     </Drawer.Navigator>
   );
 

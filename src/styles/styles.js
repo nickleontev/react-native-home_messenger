@@ -6,14 +6,19 @@ export const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center"
   },
+  bottom: {
+    flex: 1,
+    justifyContent: "flex-end",
+    alignItems: "center"
+  },
   title: {
     fontSize: 36,
     marginBottom: 16
   },
-  // androidButtonText: {
-  //   color: "blue",
-  //   fontSize: 20
-  // },
+  androidButtonText: {
+    color: "blue",
+    fontSize: 20
+  },
   container: {
     flex: 1,
     alignItems: "center",
@@ -35,13 +40,5 @@ export const styles = StyleSheet.create({
     borderWidth: 1,
     borderColor:'gray',
     marginBottom: 10
-  },
-  sign_in_up_button: {
-    width:'40%',
-    height: 45,
-    padding: 10,
-    borderColor:'gray',
-    color: 'red',
-    marginTop: '20%'
   }
 });

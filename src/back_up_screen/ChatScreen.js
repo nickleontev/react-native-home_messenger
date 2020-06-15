@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { View, Text, StyleSheet, Alert } from "react-native";
+import { HeaderButtons, Item } from "react-navigation-header-buttons";
 import { GiftedChat } from "react-native-gifted-chat";
+import { AppHeaderIcon } from "../AppHeaderIcon";
 import {
   useNavigation,
   useRoute,
@@ -20,12 +22,17 @@ const ChatScreen = ({ route, navigation }) => {
   const [messages, setMessages] = useState([]);
   const [login, setLogin] = useState("");
 
-  // useEffect(() => {
-  //   setMessages(messagesq.reverse());
-  // }, [navigation]);
+  useEffect(() => {
+    navigation.setParams({
+      headerRight: ()=><Text>1231232</Text>
+    });
+  }, [navigation]);
 
   useFocusEffect(
     React.useCallback(() => {
+
+    
+
       getMessages()
         .then(response => {
           if (!Array.isArray(response)) {
@@ -78,7 +85,7 @@ const ChatScreen = ({ route, navigation }) => {
         body: JSON.stringify({
           id: dataFromChatListScreen.data.id,
           type: dataFromChatListScreen.data.type,
-          name: dataFromChatListScreen.data.name,
+          name: dataFromChatListScreen.data.name
         })
 
         // body: dataFromChatListScreen.data
@@ -97,7 +104,6 @@ const ChatScreen = ({ route, navigation }) => {
     }
   }
 
-
   async function sendMessage(text) {
     let dataFromChatListScreen = route.params;
     console.log(
@@ -113,7 +119,7 @@ const ChatScreen = ({ route, navigation }) => {
     try {
       let json1 = JSON.stringify({
         text: text,
-        chat_id: dataFromChatListScreen.data.id,       
+        chat_id: dataFromChatListScreen.data.id
       });
       console.log("sendingJSON");
       console.log(json1);
@@ -126,7 +132,7 @@ const ChatScreen = ({ route, navigation }) => {
         },
         body: JSON.stringify({
           text: text,
-          chat_id: dataFromChatListScreen.data.id,       
+          chat_id: dataFromChatListScreen.data.id
         })
 
         // body: dataFromChatListScreen.data
@@ -136,7 +142,9 @@ const ChatScreen = ({ route, navigation }) => {
 
       return json;
     } catch (error) {
-      console.log("ChatScreen: some connection error while #sending message: " + error);
+      console.log(
+        "ChatScreen: some connection error while #sending message: " + error
+      );
       Alert.alert(
         Messages.connectionErrorTitle,
         Messages.connectionErrorMessage
@@ -152,7 +160,7 @@ const ChatScreen = ({ route, navigation }) => {
       onInputTextChanged={setText}
       onSend={onSend}
       user={{
-        _id: login,
+        _id: login
       }}
       // alignTop
       // alwaysShowSend

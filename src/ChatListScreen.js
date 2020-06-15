@@ -52,7 +52,7 @@ function Item1({ id, title, item, onSelect }) {
         <View>
           <Image
             style={styles.tinyLogo}
-            source={require("./images/user_profile.png")}
+            source={require("./images/new_chat.png")}
           />
           <Text style={styles.title}>{title}</Text>
         </View>
@@ -132,7 +132,7 @@ export default function ChatListScreen({ navigation }) {
 
       if (chats != undefined) {
         console.log("chats=");
-        console.log("id="+id);
+        console.log("id=" + id);
         console.log(chats);
         console.log(chats[id]);
         // chats.forEach(function(item, index, array) {
@@ -148,18 +148,15 @@ export default function ChatListScreen({ navigation }) {
     [selected]
   );
 
-
-  
   const onSelect1 = React.useCallback(
     item => {
       console.log("\nonSelect1 start");
       if (item != undefined) {
-        console.log("id==="+item.id);
-        console.log("item==="+item.name);
+        console.log("id===" + item.id);
+        console.log("item===" + item.name);
         navigation.navigate("Chat", { data: item });
       }
       console.log("onSelect1 end\n");
-    
     },
     [selected]
   );
@@ -183,7 +180,12 @@ export default function ChatListScreen({ navigation }) {
       <FlatList
         data={chats}
         renderItem={({ item }) => (
-          <Item1 id={item.id} title={item.name} item={item} onSelect={onSelect1} />
+          <Item1
+            id={item.id}
+            title={item.name}
+            item={item}
+            onSelect={onSelect1}
+          />
         )}
         keyExtractor={item => item.id.toString()}
         extraData={selected}

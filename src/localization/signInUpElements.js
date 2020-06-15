@@ -9,7 +9,8 @@ export const signInUpElements = new LocalizedStrings({
     username: "Username",
     password: "Password",
     name: "Name",
-    surname: "Surname"
+    surname: "Surname",
+    addContactButton:"Add contact",
   },
   ru: {
     signInButton: "Войти",
@@ -19,6 +20,7 @@ export const signInUpElements = new LocalizedStrings({
     username: "Логин",
     password: "Пароль",
     name: "Имя",
-    surname: "Фамилия"
+    surname: "Фамилия",
+    addContactButton:"Добавить в контакты",
   }
 });

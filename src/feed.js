@@ -13,14 +13,14 @@ Feed = () => {
   return (
     <View style={styles.center}>
       <Text style={styles.title}>
-        {detailResult ? detailResult.data : 'Navigation Drawer'}
+        {detailResult ? detailResult.data : 'Settings'}
       </Text>
       {
         Platform.select({
           ios:
             <Button
               title='Go to Feed Item'
-              onPress={() => navigation.navigate('Detail', { screenName: "My Detail Screen" })}
+              onPress={() => navigation.navigate('Detail', { screenName: "Setting" })}
             />,
           android:
             <TouchableOpacity

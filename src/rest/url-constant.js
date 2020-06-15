@@ -1,4 +1,6 @@
 export const SERVER_URL = "http://192.168.2.56:8080/";
+//export const SERVER_URL = "http://192.168.43.161:8080/";
+//export const SERVER_URL = "http://10.0.2.2:8080";
 export const SIGN_IN = "api/auth/signin";
 export const SIGN_UP = "api/auth/signup";
 export const CREATE_PRIVATE_CHAT = "api/create/chat/private";

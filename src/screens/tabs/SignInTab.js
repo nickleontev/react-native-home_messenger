@@ -6,8 +6,11 @@ import { SERVER_URL, SIGN_IN } from "../../rest/url-constant";
 import { Messages } from "../../localization/messages";
 import { signInUpElements } from "../../localization/signInUpElements";
 import * as SecureStore from "expo-secure-store";
+import * as SQLite from "expo-sqlite";
 
 import { styles } from "../../styles/styles.js";
+
+let db = SQLite.openDatabase("db.db");
 
 const SignInTab = () => {
   const [data, setData] = React.useState({
@@ -44,10 +47,42 @@ const SignInTab = () => {
   function whenSuccess(json) {
     if (json.success) {
       SecureStore.setItemAsync("token", json.token, {}).then(value => {
-        // navigation.navigate("Chats");
-        navigation.navigate('Chats', { update: "up" });
         SecureStore.setItemAsync("login", data.login, {});
+        db.transaction(tx => {
+          tx.executeSql("DROP TABLE IF EXISTS Contacts");
+          tx.executeSql(
+            "CREATE TABLE IF NOT EXISTS Contacts (id integer primary key not null, login, name, surname)"
+          );
+        });
+
+        json.contacts.forEach(elem => {
+          db.transaction(tx => {
+            tx.executeSql(
+              "INSERT INTO Contacts(login, name, surname) VALUES (?,?,?)",
+              [elem.login, elem.name, elem.surname]
+            );
+          });
+        });
+
+        // db.transaction(tx => {
+        //   tx.executeSql(
+        //     "SELECT * from Contacts",
+        //     [],
+        //     (tx, { rows }) => {
+        //       rows._array.forEach(elem => {
+        //         console.log("login=" + elem.login);
+        //         console.log("name=" + elem.name);
+        //         console.log("surname=" + elem.surname);
+        //       });
+        //     },
+        //     (tx, error) => {
+        //       console.log(error);
+        //     }
+        //   );
+        // });
       });
+
+      navigation.navigate("Chats", { update: "up" });
 
       // navigation.push('Chats');
     } else {

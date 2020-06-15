@@ -11,6 +11,8 @@ export const Messages = new LocalizedStrings({
       registrationFailedMessage:"User with the same username already exists.",
       registrationSuccesfulTitle: "Registration",
       registrationSuccesfulMessage:"User successfully registered.",
+      usernameNotFoundTitle:"User not found.",
+      usernameNotFoundMessage:"User with the same username not found.",
   },
   ru: {
     connectionErrorTitle: "Ошибка подключения",
@@ -22,5 +24,7 @@ export const Messages = new LocalizedStrings({
       registrationFailedMessage:"Пользователь с таким именем уже существует.",
       registrationSuccesfulTitle: "Регистрация",
       registrationSuccesfulMessage:"Пользователь успешно зарегистрирован.",
+      usernameNotFoundTitle:"Пользователь не найден.",
+      usernameNotFoundMessage:"Пользователь с таким логином не найден.",
   }
 });

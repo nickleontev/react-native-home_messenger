@@ -1,16 +1,17 @@
-import React, { Component } from 'react';
-import { View, Text, Button, TouchableOpacity } from 'react-native';
+import React, { Component } from "react";
+import { View, Text, Button, TouchableOpacity } from "react-native";
 import {
   useNavigation,
   useRoute,
   useFocusEffect,
   useNavigationState
-} from '@react-navigation/native';
+} from "@react-navigation/native";
 
-import { styles } from './styles/styles';
+import { styles } from "./styles/styles";
+import { gray } from "color-name";
+import * as SecureStore from "expo-secure-store";
 
 Detail = () => {
-
   const navigation = useNavigation();
   const route = useRoute();
   const index = useNavigationState(state => state.index);
@@ -19,21 +20,21 @@ Detail = () => {
 
   useFocusEffect(
     React.useCallback(() => {
-      fetch('https://restcountries.eu/rest/v2/capital/tallinn')
-        .then(response => {
-          response.json().then((data) => {
+      fetch("https://restcountries.eu/rest/v2/capital/tallinn").then(
+        response => {
+          response.json().then(data => {
             // console.log(data);
-          })
-        })
-      return () => console.log("lost focus")
-    }
-    )
-  )
+          });
+        }
+      );
+      return () => console.log("lost focus");
+    })
+  );
 
   return (
-    <View style={styles.center}>
-      <Text style={styles.title}>{route.params.screenName}</Text>
-      {
+    <View style={styles.bottom}>
+      <Text style={styles.title}></Text>
+      {/* {
         Platform.select({
           ios:
             <Button
@@ -47,23 +48,28 @@ Detail = () => {
               <Text style={{ color: 'blue', fontSize: 20 }}>View Bottom Tabs</Text>
             </TouchableOpacity>
         })
-      }
-      {
-        Platform.select({
-          ios:
-            <Button
-              title='View Top Tabs'
-              onPress={() => navigation.navigate('Top Tabs', { name: "param 2" })}
-            />,
-          android:
-            <TouchableOpacity
-              style={{ marginBottom: 16 }}
-              onPress={() => navigation.navigate('Top Tabs', { name: "param 2" })}>
-              <Text style={{ color: 'blue', fontSize: 20 }}>View Top Tabs</Text>
-            </TouchableOpacity>
-        })
-      }
-      {
+      } */}
+      {Platform.select({
+        ios: (
+          <Button
+            title="Exit"
+            onPress={() => navigation.navigate("Top Tabs", { name: "param 2" })}
+          />
+        ),
+        android: (
+          <TouchableOpacity
+            style={{ marginBottom: 16, borderColor: gray }}
+            onPress={() => {
+              SecureStore.setItemAsync("token", "", {});
+              SecureStore.setItemAsync("login", "", {})
+              navigation.navigate("Top Tabs", { name: "param 2" });
+            }}
+          >
+            <Text style={{ color: "red", fontSize: 20 }}>Exit</Text>
+          </TouchableOpacity>
+        )
+      })}
+      {/* {
         Platform.select({
           ios:
             <Button
@@ -76,9 +82,9 @@ Detail = () => {
               <Text style={styles.androidButtonText}>Pass Data Back</Text>
             </TouchableOpacity>
         })
-      }
-    </View >
+      } */}
+    </View>
   );
-}
+};
 
 export default Detail;
